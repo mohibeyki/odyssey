@@ -18,7 +18,7 @@ unsigned int Task::getID() {
     return this->id;
 }
 
-void Task::addDep(Task* dep) {
+void Task::addDep(Task *dep) {
     this->deps.push_back(dep);
 }
 
@@ -27,19 +27,19 @@ void Task::Finish() {
 }
 
 bool Task::isExecutable() {
-	for (auto dep: this->deps)
-		if (!dep->isFinished())
-			return false;
-	return true;
+    for (auto dep: this->deps)
+        if (!dep->isFinished())
+            return false;
+    return true;
 }
 
 bool Task::isFinished() {
-	return this->executed >= this->total;
+    return this->executed >= this->total;
 }
 
 void Task::Tick() {
     if (this->executed < this->total) {
-        this->executed ++;
+        this->executed++;
     }
     if (this->executed == this->total) {
         this->Finish();

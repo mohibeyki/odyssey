@@ -14,9 +14,11 @@
 
 class scheduler {
 public:
-	scheduler();
-	virtual ~scheduler();
-	void schedule(std::vector<Worker*>, std::vector<Task*>);
+    scheduler();
+
+    virtual ~scheduler();
+
+    void schedule(std::vector<Worker *>, std::vector<Task *>);
 };
 
 #endif /* TYPES_SCHEDULER_H_ */

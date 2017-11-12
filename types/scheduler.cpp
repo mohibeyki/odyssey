@@ -13,6 +13,6 @@ scheduler::scheduler() {
 scheduler::~scheduler() {
 }
 
-void scheduler::schedule(std::vector<Worker*> workers, std::vector<Task*> tg) {
+void scheduler::schedule(std::vector<Worker *> workers, std::vector<Task *> tg) {
 
 }

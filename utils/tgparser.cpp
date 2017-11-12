@@ -15,9 +15,9 @@ std::vector<Task> TGParser::Parse(std::string filename) {
         fin >> taskID >> taskExecutionTime >> deps;
         Task task(taskID, taskExecutionTime);
         for (unsigned int j = 0; j < deps; ++j) {
-        	int dep;
-        	fin >> dep;
-        	task.addDep(&tg[dep]);
+            int dep;
+            fin >> dep;
+            task.addDep(&tg[dep]);
         }
     }
     return tg;

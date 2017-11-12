@@ -6,6 +6,3 @@
 //  Copyright © 2017 Mohi Beyki. All rights reserved.
 //
 
-#include <cstdint>
-#include <cpuid.h>
-#include "utils.h"

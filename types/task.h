@@ -16,14 +16,20 @@ private:
     unsigned int id;
     unsigned int total;
     unsigned int executed;
-    std::vector<Task*> deps;
+    std::vector<Task *> deps;
 public:
     Task(unsigned int, unsigned int);
+
     unsigned int getID();
-    void addDep(Task* task);
+
+    void addDep(Task *task);
+
     bool isFinished();
+
     void Finish();
+
     void Tick();
+
     bool isExecutable();
 };
 

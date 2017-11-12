@@ -36,3 +36,5 @@ odyssey
 .project
 .vscode
 .settings
+.idea
+cmake-build-debug
