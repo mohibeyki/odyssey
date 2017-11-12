@@ -9,10 +9,4 @@
 #ifndef utils_h
 #define utils_h
 
-#include <stdio.h>
-#include <cstdint>
-
-void CPU_ID(std::uint32_t[], std::uint32_t, std::uint32_t);
-int GET_CPU();
-
 #endif /* utils_h */
