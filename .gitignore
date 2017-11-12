@@ -32,3 +32,7 @@
 *.app
 odyssey
 *.dSYM
+.cproject
+.project
+.vscode
+.settings
