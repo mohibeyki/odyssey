@@ -16,16 +16,18 @@
 class Worker {
 private:
     const unsigned int max = 15300;
-    std::deque<Task *> queue;
+    Task* job;
 
 public:
     void Start(int, std::mutex &);
 
-    void addTask(Task *);
+    void setTask(Task *);
 
     void Load();
 
     void Tick();
+
+    bool isIdle();
 };
 
 #endif

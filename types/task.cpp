@@ -41,7 +41,7 @@ void Task::Tick() {
     if (this->executed < this->total) {
         this->executed++;
     }
-    if (this->executed == this->total) {
+    if (this->executed >= this->total) {
         this->Finish();
     }
 }

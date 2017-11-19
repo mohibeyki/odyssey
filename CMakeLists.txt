@@ -4,8 +4,8 @@ project(odyssey)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        types/scheduler.cpp
-        types/scheduler.h
+        types/Scheduler.cpp
+        types/Scheduler.h
         types/task.cpp
         types/task.h
         types/worker.cpp

@@ -21,8 +21,8 @@ void Worker::Start(int id, std::mutex &iomutex) {
     }
 }
 
-void Worker::addTask(Task *task) {
-    this->queue.push_back(task);
+void Worker::setTask(Task *task) {
+    this->job = task;
 }
 
 void Worker::Load() {
@@ -33,16 +33,13 @@ void Worker::Load() {
 }
 
 void Worker::Tick() {
-    if (!this->queue.empty()) {
-        Task *currentTask = this->queue.front();
-        if (!currentTask->isFinished() && currentTask->isExecutable()) {
-            currentTask->Tick();
-            this->Load();
-            if (currentTask->isFinished()) {
-                this->queue.pop_front();
-            }
-        } else {
-            cerr << "Something went wrong" << endl;
-        }
+    if (this->job->isExecutable()) {
+        this->job->Tick();
+    } else {
+        cerr << "something went wrong task with task id of " << this->job->getID() << " is not executable" << endl;
     }
+}
+
+bool Worker::isIdle() {
+    return this->job == NULL || this->job->isFinished();
 }

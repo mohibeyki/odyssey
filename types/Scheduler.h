@@ -12,13 +12,13 @@
 #include "worker.h"
 #include "task.h"
 
-class scheduler {
+class Scheduler {
 public:
-    scheduler();
+    Scheduler();
 
-    virtual ~scheduler();
+    virtual ~Scheduler();
 
-    void schedule(std::vector<Worker *>, std::vector<Task *>);
+    void Schedule(std::vector<Worker *>, std::vector<Task *>);
 };
 
 #endif /* TYPES_SCHEDULER_H_ */
