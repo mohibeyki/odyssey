@@ -14,24 +14,25 @@
 
 #include "utils/tgparser.h"
 #include "types/worker.h"
+#include "types/Scheduler.h"
 
 using namespace std;
 
 int main(int argc, const char **argv) {
-    constexpr unsigned n_cpu = 10;
+    constexpr unsigned n_cpu = 8;
 
     TGParser parser;
-    vector<Task> tg = parser.Parse("robot.stg");
+    vector<Task *> tg = parser.Parse("../robot.stg");
 
     mutex iomutex;
     vector<thread> threads(n_cpu);
-    vector<Worker> workers;
+    vector<Worker *> workers;
 
     for (unsigned i = 0; i < n_cpu; ++i)
-        workers.push_back(Worker());
+        workers.push_back(new Worker(i, i < n_cpu / 2));
 
     for (unsigned i = 0; i < n_cpu; ++i) {
-        threads[i] = thread(&Worker::Start, workers[i], i, std::ref(iomutex));
+        threads[i] = thread(&Worker::Start, workers[i], std::ref(iomutex));
 //		cpu_set_t cpuset;
 //		CPU_ZERO(&cpuset);
 //		CPU_SET(i, &cpuset);
@@ -42,8 +43,13 @@ int main(int argc, const char **argv) {
 //		}
     }
 
+    auto *scheduler = new Scheduler;
+    scheduler->Schedule(workers, tg);
+
+    cout << "joining" << endl;
     for (auto &t : threads) {
         t.join();
     }
+    cout << "exiting" << endl;
     return 0;
 }

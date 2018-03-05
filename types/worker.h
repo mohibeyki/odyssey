@@ -15,19 +15,38 @@
 
 class Worker {
 private:
-    const unsigned int max = 15300;
-    Task* job;
-
+    const unsigned int max = 1024 * 1024;
+    int id;
+    bool low_perf;
 public:
-    void Start(int, std::mutex &);
+    int getId() const;
+
+private:
+    Task *job;
+    bool busy;
+    bool alive;
+public:
+    explicit Worker(int, bool);
+
+    void Start(std::mutex &);
+
+    bool isAlive();
+
+    void Kill();
 
     void setTask(Task *);
+
+    bool hasJob();
 
     void Load();
 
     void Tick();
 
-    bool isIdle();
+    bool getBusy();
+
+    void Resume();
+
+    void Stop();
 };
 
 #endif

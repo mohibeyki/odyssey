@@ -14,7 +14,7 @@ Task::Task(unsigned int id, unsigned int total) {
     this->executed = 0;
 }
 
-unsigned int Task::getID() {
+unsigned int Task::getId() {
     return this->id;
 }
 
@@ -30,7 +30,7 @@ bool Task::isExecutable() {
     for (auto dep: this->deps)
         if (!dep->isFinished())
             return false;
-    return true;
+    return !this->isFinished();
 }
 
 bool Task::isFinished() {
@@ -44,4 +44,8 @@ void Task::Tick() {
     if (this->executed >= this->total) {
         this->Finish();
     }
+}
+
+unsigned int Task::getExecuted() const {
+    return executed;
 }

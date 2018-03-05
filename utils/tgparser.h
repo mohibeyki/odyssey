@@ -15,7 +15,7 @@
 
 class TGParser {
 public:
-    std::vector<Task> Parse(std::string);
+    std::vector<Task *> Parse(std::string);
 };
 
 #endif
