@@ -14,29 +14,12 @@ Worker::Worker(int id, bool low_perf) {
 }
 
 void Worker::Start(std::mutex &iomutex) {
-//    {
-//        std::lock_guard<std::mutex> iolock(iomutex);
-//        cout << "Thread #" << id << "\t started" << endl;
-//    }
     while (this->isAlive()) {
         while (this->isAlive() && !this->getBusy()) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
-
         this->Tick();
     }
-//    {
-//        std::lock_guard<std::mutex> iolock(iomutex);
-//        cout << "Thread #" << id << "\t exiting" << endl;
-//    }
-//    auto start = std::chrono::steady_clock::now();
-//    this->Tick();
-//    auto dur = std::chrono::duration_cast<std::chrono::microseconds>(
-//            std::chrono::steady_clock::now() - start);
-//    {
-//        std::lock_guard<std::mutex> iolock(iomutex);
-//        cout << dur.count() << "\n";
-//    }
 }
 
 void Worker::setTask(Task *task) {
@@ -45,7 +28,7 @@ void Worker::setTask(Task *task) {
 
 void Worker::Load() {
     for (unsigned long i = 1; this->busy; ++i) {
-        if (this->low_perf && i % 15000 == 0) {
+        if (this->low_perf && i % 15000 == 0) { // This number should be re-calculated for a new host machine
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
     }

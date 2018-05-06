@@ -33,6 +33,10 @@ int main(int argc, const char **argv) {
 
     for (unsigned i = 0; i < n_cpu; ++i) {
         threads[i] = thread(&Worker::Start, workers[i], std::ref(iomutex));
+
+//
+//      This is Linux specific Core Affinity functionality, it locks a thread to a specific core on the host machine
+//
 //		cpu_set_t cpuset;
 //		CPU_ZERO(&cpuset);
 //		CPU_SET(i, &cpuset);
@@ -46,7 +50,6 @@ int main(int argc, const char **argv) {
     auto *scheduler = new Scheduler;
     scheduler->Schedule(workers, tg);
 
-    cout << "joining" << endl;
     for (auto &t : threads) {
         t.join();
     }
